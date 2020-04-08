@@ -1,0 +1,45 @@
+/* Style for components in /components/sign-in-comps */
+/* Exported to SignInComp.js */
+
+.login{
+    padding: 5px;
+    margin: 20px;
+}
+.row{
+    margin-bottom: 0;
+}
+.inline{
+    display: inline;
+}
+
+.login-label{
+    font-size: 15px;
+}
+
+.sign-in-layout{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.sign-up{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sign-up-heading{
+    border-bottom: 2px solid gray;
+    margin-bottom: 20px;
+}
+
+.submit-button{
+    padding: 10px;
+}
+
+.sign-up-form-item{
+    padding: 3px;
+}
+
+.test{
+    width: 100%;
+    height: 100%;
+}
