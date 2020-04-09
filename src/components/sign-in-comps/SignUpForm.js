@@ -6,7 +6,7 @@ class SignUp extends Component{
             <div className="sign-up container grey lighten-2 z-depth-1">
                 <div className="sign-up-heading center">
                     <h3>Sign Up</h3>
-                    <p>Please sign up for a free account!</p>
+                    <p>Sign up for a free account!</p>
                 </div>
                 
                 <form className="sign-up-form">

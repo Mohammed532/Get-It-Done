@@ -41,6 +41,14 @@
     border-bottom: 1px solid gray;
 }
 
+.add-form-heading{
+    padding-right: 10px;
+}
+
+.invalid{
+    border: 1px solid red;
+}
+
 /* WILL MIGRATE ALL OF THESE STYLES TO THIER RESPECTIVE FOLDERS */
 
 .assignment-header{
@@ -49,4 +57,16 @@
 
 .assignment-date{
     font-style: italic;
+}
+
+.contact{
+    color: white;
+    font-size: 15px;
+    padding-right: 15px;
+}
+
+.title-drop-down{
+    padding: 3px;
+    border-radius: 4px;
+    border: 1px solid gray;
 }

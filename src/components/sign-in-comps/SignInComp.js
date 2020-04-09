@@ -8,7 +8,7 @@ import './sign-in.css'
 class SignInComp extends Component{
     render(){
         return(
-            <div className="sign-in-head">
+            <div className="sign-in-head light-blue darken-4">
                 <Login />
                 <SignInLayout />
                 <SignUp />                

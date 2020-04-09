@@ -1,4 +1,5 @@
 import React from 'react'
+import { Icon } from 'react-materialize'
 import doorIcon from '../../res/transparent-doors-black-4.png'
 import bookIcon from '../../res/transparent-book.png'
 import gradCapIcon from '../../res/transparent-graduation-hat.png'
@@ -13,6 +14,7 @@ const Navbar = () =>{
                 <li><a href="/home/classroom"><img src={doorIcon} width='60px' height='60px' title="Classroom"></img></a></li>
                 <li><a href="/home/assignments"><img src={bookIcon} width='60px' height='60px' title="Assignments"></img></a></li>
                 <li><a href="/home/educators"><img src={gradCapIcon} width='60px' height='60px' title="Educators"></img></a></li>
+                <li><a href="/"><Icon className="black-text" large>exit_to_app</Icon></a></li>
                 {/* <li><div className="divider"></div></li>
                 <li><a className="subheader">Subheader</a></li>
                 <li><a className="waves-effect" href="#!">Third Link With Waves</a></li> */}
