@@ -1,26 +1,48 @@
 import React, { Component } from 'react'
+import { auth, db } from '../../../config/fbConfig'
 import Navbar from '../Navbar'
 import AddAssignment from './AddAssignment'
 import Work from './Work'
 
 class Assignments extends Component{
-    state = {
-        assignments: [
-            {id:1, title:"Page #169", subject:"Math", teacher:"Mrs. S", description:"do it", dueDate:"4/8/20", link:"", url:""},
-            {id:2, title:"Read Hamlet", subject:"Reading", teacher:"Mrs. Price", description:"read it", dueDate:"4/9/20", link:"", url:""},
-        ]
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            assignments: this.props.assignments
+        }
+    }
+
+    componentDidMount(){
+        db.collection("users").doc(auth.currentUser.uid).collection("assignment").get()
+          .then(snapshot =>{
+                snapshot.docs.map(doc =>{
+                    this.setState({
+                        assignments: [...this.state.assignments, doc.data()]
+                    })
+                    
+                })
+              
+          })
     }
 
     addAssignment = (assignment)=>{
-        assignment.id = this.state.assignments.length + 1;
-        const assnmntList = [assignment, ...this.state.assignments]
-        this.setState({
-            assignments: assnmntList
-        })
+        console.log(assignment);
         
+        const {uid} = auth.currentUser
+        db.collection("users").doc(uid).collection("assignment").add(assignment)
+          .then(docRef =>{
+              assignment.id = docRef.id;
+              console.log(assignment.id);
+
+              const assnmntList = [assignment, ...this.state.assignments]
+              this.setState({
+                  assignments: assnmntList
+              })
+          })
     }
 
-    render() {
+    render() {        
         return (
             <div className="assignment home">
                 <div className="row">

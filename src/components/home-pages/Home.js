@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar'
 import Educators from './educators/Educators'
+import Assignments from './assignments/Assignments'
+import Classroom from './classroom/Classroom'
+import User from './user/UserInfo'
 import './home.css'
 import Welcome from './Welcome'
 
@@ -62,11 +65,22 @@ class Home extends Component{
         ),
     }
 
+    componentDidMount(){
+        let path = this.props.parentPath;
+        this.props.history.push(`${path}/welcome`);
+    }
 
     render() {
+        let parentPath = this.props.parentPath;
+        
         return (
             <div>
-            <Welcome />
+            <Route path={`${parentPath}/welcome`} component={Welcome} />
+            <Route path="/home/educators" component={Educators} />
+            <Route path="/home/assignments" render={(props) =><Assignments {...props} assignments={this.props.assignments} />} />
+            <Route path="/home/classroom" component={Classroom} />
+            <Route path="/home/educators" component={Educators} />
+            <Route path="/home/profile" component={User} />
             </div>
         )
     }

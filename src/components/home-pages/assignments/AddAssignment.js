@@ -15,7 +15,7 @@ class AddAssignment extends Component{
         teacher: "",
         description: "",
         dueDate: "",
-        link: "",
+        file: "",
         url: ""
         
     }
@@ -29,9 +29,21 @@ class AddAssignment extends Component{
     };
 
     handleChange = e =>{
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        if(e.target.name === "dueDate"){
+            const d = new Date(e.target.value);
+            
+            let month = d.getMonth() + 1;
+            let day = d.getDate();
+            let year = d.getFullYear();
+
+            this.setState({
+                dueDate: `${month}/${day}/${year}`
+            })
+        }else{
+            this.setState({
+                [e.target.name]: e.target.value
+            })
+        }
     }
 
     //safely removes element from state (doesn't mutate the actual state)
@@ -54,14 +66,24 @@ class AddAssignment extends Component{
                 teacher: "",
                 description: "",
                 dueDate: "",
-                link: "",
+                file: "",
                 url: ""
             })
 
-            let info = this.removeElement(this.state, "modalOpen");
-            info = this.removeElement(this.state, "titleIsEmpty");
-            info = this.removeElement(this.state, "subjectIsEmpty");
-            info = this.removeElement(this.state, "teacherIsEmpty");
+            // let info = this.removeElement(this.state, "modalOpen");
+            // info = this.removeElement(this.state, "titleIsEmpty");
+            // info = this.removeElement(this.state, "subjectIsEmpty");
+            // info = this.removeElement(this.state, "teacherIsEmpty");
+
+            const info ={
+                title: this.state.title,
+                subject: this.state.subject,
+                teacher: this.state.teacher,
+                description: this.state.description,
+                dueDate: this.state.dueDate,
+                file: this.state.file,
+                url: this.state.url  
+            }
             this.props.addAssignment(info)
 
             this.onCloseModal()
@@ -120,7 +142,7 @@ class AddAssignment extends Component{
                                 onChange={this.handleChange}
                                 />
                             <TextInput 
-                                className={`col s6 ${subjectIsEmpty ? 'invalid':''}`}
+                                className={`col s6 ${teacherIsEmpty ? 'invalid':''}`}
                                 name="teacher"
                                 placeholder="Teacher"
                                 onChange={this.handleChange}
@@ -138,7 +160,7 @@ class AddAssignment extends Component{
                                 onChange={this.handleChange}
                             />
                             <TextInput
-                                name="link"
+                                name="file"
                                 placeholder="Link to file (saves file)"
                                 label="File"
                                 type="file"

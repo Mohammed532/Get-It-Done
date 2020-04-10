@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { auth } from '../../config/fbConfig';
+import { auth, db } from '../../config/fbConfig';
 import { TextInput } from 'react-materialize'
 
 class SignUp extends Component{
     state = {
+        passwordMatch: true,
         firstName: "",
         lastName: "",
         email: "",
@@ -12,6 +13,8 @@ class SignUp extends Component{
     }
 
     handleChange = e =>{
+        console.log(e.target.name, e.target.value);
+        
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -19,18 +22,34 @@ class SignUp extends Component{
 
     handleSubmit = e =>{
         e.preventDefault();
-        let {firstName, lastName, email, psswrd} = {...this.state};
+        let {firstName, lastName, email, psswrd, psswrdConfirm} = {...this.state};
 
-        auth.createUserWithEmailAndPassword(email, psswrd).then((user) =>{
-            console.log("User Signed Up!");
-            console.log(user);
-        }).catch((err) =>{
-            console.error("There was a problem........", err);
-        })
+        if(psswrd !== psswrdConfirm){
+            this.setState({passwordMatch: false})
+            
+        }else{
+            this.setState({passwordMatch: true})
+
+            auth.createUserWithEmailAndPassword(email, psswrd)
+              .then((user) =>{
+                console.log("User Signed Up!");
+                console.log(user);
+                
+                this.props.getDisplayName(firstName, lastName)
+                
+              })
+              .catch((err) =>{
+                console.error("There was a problem........", err);
+              })
+            
+        }
+
+
         
     }
 
     render() {
+        const {passwordMatch} = this.state;
         return (
             <div className="sign-up container grey lighten-2 z-depth-1">
                 <div className="sign-up-heading center">
@@ -71,7 +90,7 @@ class SignUp extends Component{
                     </div>
                     <div className="row">
                         <TextInput 
-                          className=""
+                          className={`${passwordMatch ? "" : "invalid"}`}
                           onChange={this.handleChange}
                           name="psswrd"
                           type="password"
@@ -81,9 +100,9 @@ class SignUp extends Component{
                     </div>
                     <div className="row">
                         <TextInput 
-                          className=""
+                          className={`${passwordMatch ? "" : "invalid"}`}
                           onChange={this.handleChange}
-                          name="psswrConfirm"
+                          name="psswrdConfirm"
                           type="password"
                           label="Confirm Password"
                           s={12}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
-import { auth } from './config/fbConfig';
+import { auth, db } from './config/fbConfig';
 import SignInComp from './components/sign-in-comps/SignInComp'
 import Home from './components/home-pages/Home'
 import Assignments from './components/home-pages/assignments/Assignments'
@@ -9,24 +9,25 @@ import Educators from './components/home-pages/educators/Educators'
 import User from './components/home-pages/user/UserInfo'
 import Footer from './components/other/Footer'
 
-
+var displayName;
 class App extends Component{
-    constructor(props){
-        super(props);
-        console.log(props);
-        
-        this.state = {
-            user: null,
-            redirect: null,
-            needUpdate: true
-        }
-    
+    state = {
+        assignments: [],
+        teachers: [],
+
+        newUser: null,
+        user: null,
+        redirect: null,
+        needUpdate: true
     }
     
-
     componentDidMount(){
         this.authListener()
         
+    }
+
+    getDisplayName = (firstName, lastName) =>{
+        displayName = `${firstName} ${lastName}`
     }
 
     authListener = () =>{
@@ -34,18 +35,71 @@ class App extends Component{
             this.setState({needUpdate: true})
             if(user){
                 console.log("User is logged in");
+
+                user.updateProfile({
+                    displayName: displayName
+                })
+
+                db.collection("users").doc(user.uid).get()
+                  .then(snapshot =>{
+                      if (snapshot.exists){
+                          snapshot.collection("assignments").get()
+                            .then(snapshot.doc.map(doc =>{console.log(doc.data());}))
+                      }else{
+                          
+                      }
+                  })
+
                 this.setState({
                     user,
-                    redirect: "/home"
                 })
             }else{
                 console.log("User is logged out");
                 this.setState({
                     user: null,
-                    redirect: "/sign-up"
                 })
             }
         }) 
+        
+    }
+
+    isNewUser = (login) =>{
+        this.setState({newUser: login})
+        console.log(login);
+        
+    }
+
+    renderHome = () =>{
+        let path = `/${this.state.user.uid}/home`
+        return(
+            <div>
+                <Route to={path} render={(props) => 
+                    <Home 
+                      {...props} 
+                      parentPath={path}
+                      assignments={this.state.assignments}
+                      teachers={this.state.teachers} />}>
+                </Route>
+                <Redirect to={`${path}/welcome`} />
+            </div>
+        );
+    }
+
+    renderSignIn = () =>{
+        let path = "/sign-in"
+        console.log("hit");
+        
+        return(
+            <div>
+                <Route to={path} render={(props) =>
+                    <SignInComp 
+                      {...props} 
+                      isNewUser={this.isNewUser} 
+                      getDisplayName={this.getDisplayName} />}>
+                </Route>
+                <Redirect to={path} />
+            </div>
+        );
         
     }
 
@@ -69,12 +123,7 @@ class App extends Component{
         return(
             <BrowserRouter>
             <div id='app'>
-                <Route path="/sign-up"><SignInComp /></Route>
-                <Route path="/home"><Home /></Route>
-                <Route exact path="/home/assignments" component={Assignments} />
-                <Route exact path="/home/classroom" component={Classroom} />
-                <Route exact path="/home/educators" component={Educators} />
-                <Route exact path="/home/profile" component={User} />
+                {this.state.user ? (this.renderHome()) : (this.renderSignIn())}
                 <Footer />
             </div>
             </BrowserRouter>

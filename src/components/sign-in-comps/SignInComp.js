@@ -11,9 +11,9 @@ class SignInComp extends Component{
     render(){        
         return(
             <div className="sign-in-head light-blue darken-4">
-                <Login />
+                <Login isNewUser={this.props.isNewUser} />
                 <SignInLayout />
-                <SignUp />                
+                <SignUp isNewUser={this.props.isNewUser} getDisplayName={this.props.getDisplayName} />                
                 <About />
             </div>
         )

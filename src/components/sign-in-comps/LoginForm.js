@@ -1,11 +1,35 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { auth } from '../../config/fbConfig';
 
 
 class Login extends Component{
     state = {
-        ussername: "",
+        email: "",
         psswrd: "",
+    }
+
+    handleChange = e =>{
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
+    handleSubmit = e =>{
+        e.preventDefault();
+        let { email, psswrd } = {...this.state};
+        console.log(email);
+        
+
+        auth.signInWithEmailAndPassword(email, psswrd)
+          .then(user =>{
+            console.log(`${user.email} has logged in`); 
+            this.props.isNewUser(false);  
+          })
+          .catch(err =>{
+            console.error("Darn", err);
+          })
+
     }
 
     render() {
@@ -15,16 +39,24 @@ class Login extends Component{
                     <div className="col s5"><h4 className="inline white-text">Login</h4></div>
                     
                     <div className="col s6">
-                        <form className="">
+                        <form className="" onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <div className="col s6">
-                                    <label htmlFor="usrname" className="white-text login-label">Username </label>
-                                    <input type="text" id="usrname" className="browser-default"></input>
+                                    <label htmlFor="email" className="white-text login-label">Email </label>
+                                    <input 
+                                      type="email" 
+                                      id="email" 
+                                      className="browser-default"
+                                      onChange={this.handleChange}></input>
                                 </div>
 
                                 <div className="col s6">
                                     <label htmlFor="psswrd" className="white-text login-label">Password </label>
-                                    <input type="password" id="psswrd" className="browser-default"></input>
+                                    <input 
+                                      type="password" 
+                                      id="psswrd" 
+                                      className="browser-default"
+                                      onChange={this.handleChange}></input>
                                 </div>
                             </div>
                             
@@ -32,7 +64,7 @@ class Login extends Component{
                     </div>
 
                     <div className="col s1">
-                        <Link to="/home"><button className="btn-small grey lighten-2 black-text">Login</button></Link>
+                    <button className="btn-small grey lighten-2 black-text" onClick={this.handleSubmit}>Login</button>
                     </div>
                 </div>
             </div>
