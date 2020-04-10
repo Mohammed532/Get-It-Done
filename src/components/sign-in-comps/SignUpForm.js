@@ -1,6 +1,35 @@
 import React, { Component } from 'react'
+import { auth } from '../../config/fbConfig';
+import { TextInput } from 'react-materialize'
 
 class SignUp extends Component{
+    state = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        psswrd: "",
+        psswrdConfirm: "",
+    }
+
+    handleChange = e =>{
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = e =>{
+        e.preventDefault();
+        let {firstName, lastName, email, psswrd} = {...this.state};
+
+        auth.createUserWithEmailAndPassword(email, psswrd).then((user) =>{
+            console.log("User Signed Up!");
+            console.log(user);
+        }).catch((err) =>{
+            console.error("There was a problem........", err);
+        })
+        
+    }
+
     render() {
         return (
             <div className="sign-up container grey lighten-2 z-depth-1">
@@ -9,34 +38,56 @@ class SignUp extends Component{
                     <p>Sign up for a free account!</p>
                 </div>
                 
-                <form className="sign-up-form">
+                <form className="sign-up-form" onSubmit={this.handleSubmit}>
                     <div className="row">
-                        <div className="col s6 sign-up-form-item">
-                            <label htmlFor="first-name">First Name</label>
-                            <input type="text" id="first-name"></input>
-                        </div>
-                        <div className="col s6 sign-up-form-item">
-                            <label htmlFor="first-name">Last Name</label>
-                            <input type="text" id="first-name"></input>
-                        </div>
+                        <TextInput
+                          className=""
+                          onChange={this.handleChange}
+                          name="firstName"
+                          label="First Name"
+                          m={12}
+                          l={6}
+                        />
+                        <TextInput
+                          className=""
+                          onChange={this.handleChange}
+                          name="lastName"
+                          label="Last Name"
+                          m={12}
+                          l={6}
+                        />
                     </div>
                     <div className="row">
-                        <div className="col s12 sign-up-form-item">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email"></input>
-                        </div>
+                        <TextInput 
+                          className=""
+                          onChange={this.handleChange}
+                          name="email"
+                          type="email"
+                          label="Email"
+                          placeholder="example@email.com"
+                          validate
+                          s={12}
+                        />
                     </div>
                     <div className="row">
-                        <div className="col s12 sign-up-form-item">
-                            <label htmlFor="new-psswrd">Password</label>
-                            <input type="password" id="new-psswrd"></input>
-                        </div>
+                        <TextInput 
+                          className=""
+                          onChange={this.handleChange}
+                          name="psswrd"
+                          type="password"
+                          label="Password"
+                          s={12}
+                        />
                     </div>
                     <div className="row">
-                        <div className="col s12 sign-up-form-item">
-                            <label htmlFor="new-password-confirm">Confirm Password</label>
-                            <input type="email" id="new-password-confirm"></input>
-                        </div>
+                        <TextInput 
+                          className=""
+                          onChange={this.handleChange}
+                          name="psswrConfirm"
+                          type="password"
+                          label="Confirm Password"
+                          s={12}
+                        />
                     </div>
                     <div className="center submit-button">
                         <button className="waves-effect waves-light btn-large light-blue darken-2">Sign Up!</button>

@@ -24,3 +24,6 @@ yarn-error.log*
 
 #todo list doesn't need to be seen
 *.todo
+
+#config files
+/src/config

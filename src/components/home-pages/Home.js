@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar'
+import Educators from './educators/Educators'
 import './home.css'
+import Welcome from './Welcome'
 
 class Home extends Component{
     state = {
@@ -62,13 +65,8 @@ class Home extends Component{
 
     render() {
         return (
-            <div className="home">
-                <div className="row">
-                    <div className="col s1 home-nav"><Navbar /></div>
-                    <div className="col s9">
-                        {this.state.display}
-                    </div>
-                </div>
+            <div>
+            <Welcome />
             </div>
         )
     }
