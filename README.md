@@ -21,3 +21,7 @@ Students who need to keep track of all of their assignments and send them to the
 
 ## Author
 [Mohammed Akinbayo](https://github.com/Mohammed532)
+
+[Link to Devpost Account](https://devpost.com/Mohammed532?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav)
+
+[**Inspiration**](https://youtu.be/dQw4w9WgXcQ)
