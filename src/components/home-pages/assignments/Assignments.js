@@ -14,32 +14,42 @@ class Assignments extends Component{
     }
 
     componentDidMount(){
-        db.collection("users").doc(auth.currentUser.uid).collection("assignment").get()
+        db.collection("users").doc(auth.currentUser.uid).collection("assignments").get()
           .then(snapshot =>{
                 snapshot.docs.map(doc =>{
                     this.setState({
                         assignments: [...this.state.assignments, doc.data()]
-                    })
-                    
+                    }) 
                 })
-              
           })
     }
 
-    addAssignment = (assignment)=>{
-        console.log(assignment);
-        
+    addAssignment = (assignment)=>{    
         const {uid} = auth.currentUser
-        db.collection("users").doc(uid).collection("assignment").add(assignment)
+        db.collection("users").doc(uid).collection("assignments").add(assignment)
           .then(docRef =>{
-              assignment.id = docRef.id;
-              console.log(assignment.id);
+              assignment.authId = docRef.id;
 
               const assnmntList = [assignment, ...this.state.assignments]
               this.setState({
                   assignments: assnmntList
               })
+
+              db.collection("users").doc(uid).collection("assignments")
+                .doc(assignment.authId).update({authId: assignment.authId})
           })
+    }
+
+    deleteAssignment = (id) =>{
+        const newAssignment = this.state.assignments.filter(assignment =>{
+            return assignment.authId !== id;
+        })
+
+        this.setState({
+            assignments: newAssignment
+        })
+
+        db.collection("users").doc(auth.currentUser.uid).collection("assignments").doc(id).delete()
     }
 
     render() {        
@@ -51,7 +61,7 @@ class Assignments extends Component{
                     <div>
                         <h2 className="page-heading">Assignments</h2>
                             <AddAssignment addAssignment={this.addAssignment}/>
-                            <Work assignments={this.state.assignments}/>
+                            <Work assignments={this.state.assignments} deleteAssignment={this.deleteAssignment}/>
                         </div>
                     </div>
                 </div>

@@ -1,22 +1,25 @@
 import React from 'react'
-import { Collapsible } from 'react-materialize'
+import { Collapsible, Divider } from 'react-materialize'
 
-const Work = ({assignments}) =>{
-    console.log(assignments);
+const Work = ({assignments, deleteAssignment}) =>{
     let assignmentList = assignments.length ? (
         assignments.map(assnmnt =>{
             return(
-                <li key={assnmnt.id}>
+                <li key={assnmnt.authId}>
                     <div className="collapsible-header">
                         <div className="container">
                             <span className="assignment-header">{assnmnt.title}</span>
                             <span className="assignment-date right">Due Date: {assnmnt.dueDate}</span>
-                        </div>  
+                            
+                        </div> 
+ 
                     </div>
                     <div className="collapsible-body">
                         <h6>Subject: {assnmnt.subject}</h6>
                         <h6>Teacher: {assnmnt.teacher}</h6>
                         <p>{assnmnt.description}</p>
+                        <Divider />
+                        {/* <span className="edit">Edit</span> */} <span className="delete" onClick={()=>{deleteAssignment(assnmnt.authId)}}>Delete</span>
                     </div>
                 </li>
             )

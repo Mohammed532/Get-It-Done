@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { auth } from '../../config/fbConfig';
 
 
@@ -18,12 +17,9 @@ class Login extends Component{
     handleSubmit = e =>{
         e.preventDefault();
         let { email, psswrd } = {...this.state};
-        console.log(email);
-        
 
         auth.signInWithEmailAndPassword(email, psswrd)
           .then(user =>{
-            console.log(`${user.email} has logged in`); 
             this.props.isNewUser(false);  
           })
           .catch(err =>{
@@ -36,9 +32,9 @@ class Login extends Component{
         return (
             <div className="login z-depth-2 grey darken-3">
                 <div className="row valign-wrapper">
-                    <div className="col s5"><h4 className="inline white-text">Login</h4></div>
+                    <div className="col m5 hide-on-small-only"><h4 className="inline white-text">Login</h4></div>
                     
-                    <div className="col s6">
+                    <div className="col s12 m6">
                         <form className="" onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <div className="col s6">
@@ -63,7 +59,7 @@ class Login extends Component{
                         </form>
                     </div>
 
-                    <div className="col s1">
+                    <div className="col s3 m1">
                     <button className="btn-small grey lighten-2 black-text" onClick={this.handleSubmit}>Login</button>
                     </div>
                 </div>

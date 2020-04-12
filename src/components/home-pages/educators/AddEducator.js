@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, TextInput, Dropdown, Divider, Row, Col, Toast } from 'react-materialize'
+import { Button, Icon, TextInput, Dropdown, Divider, Row, Col } from 'react-materialize'
 import { Modal } from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css';
 
@@ -7,7 +7,7 @@ class AddEducators extends Component{
     state = {
         modalOpen: false,
         nameIsEmpty: false,
-        classIsEmpty: false,
+        emailIsEmpty: false,
 
         title: "Mr.",
         name: "",
@@ -45,11 +45,11 @@ class AddEducators extends Component{
     handleSubmit = e =>{
         e.preventDefault();
 
-        if(this.state.name !== "" && this.state.class !== ""){
+        if(this.state.name !== "" && this.state.email !== ""){
             
             this.setState({
                 nameIsEmpty: false,
-                classIsEmpty: false,
+                emailIsEmpty: false,
 
                 title: "Mr.",
                 name: "",
@@ -59,8 +59,11 @@ class AddEducators extends Component{
             })
 
             let info = this.removeElement(this.state, "modalOpen");
-            info = this.removeElement(this.state, "nameIsEmpty");
-            info = this.removeElement(this.state, "classIsEmpty");
+            info = this.removeElement(info, "nameIsEmpty");
+            info = this.removeElement(info, "emailIsEmpty");
+            info.name = `${info.title} ${info.name}`
+            info = this.removeElement(info, "title");
+
             this.props.addEducator(info)
 
             this.onCloseModal()
@@ -72,9 +75,9 @@ class AddEducators extends Component{
                 })
             }
             
-            if(this.state.class === ""){
+            if(this.state.email === ""){
                 this.setState({
-                    classIsEmpty: true
+                    emailIsEmpty: true
                 })
             }
         }
@@ -83,7 +86,7 @@ class AddEducators extends Component{
     }
 
     render() {
-        const { modalOpen, nameIsEmpty, classIsEmpty } = this.state;
+        const { modalOpen, nameIsEmpty, emailIsEmpty } = this.state;
         return (
             <div className="add-educator">
                <h3>
@@ -101,7 +104,7 @@ class AddEducators extends Component{
                     <Modal open={modalOpen} onClose={this.onCloseModal} center blockScroll={true} closeOnOverlayClick={true}>
                         <form className="add-assignment-form" onSubmit={this.handleSubmit}>
                             <h3>Please fill out this form</h3>
-                            <i>(Teacher's name and class is mandatory)</i>
+                            <i>(Teacher's name and email is mandatory)</i>
                             <Row>
                                 <Col s={4}>
                                     <Dropdown
@@ -125,12 +128,12 @@ class AddEducators extends Component{
                                 </Col>
                             </Row>
                             <TextInput 
-                              className={`${classIsEmpty ? 'invalid' : ''}`}
                               placeholder="Class"
                               name="class"
                               onChange={this.handleChange}
                             />
                             <TextInput
+                              className={`${emailIsEmpty ? 'invalid' : ''}`}
                               placeholder="Email"
                               type="email"
                               name="email"

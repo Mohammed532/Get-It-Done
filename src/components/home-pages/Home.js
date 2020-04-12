@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Navbar from './Navbar'
+import { Route } from 'react-router-dom'
 import Educators from './educators/Educators'
 import Assignments from './assignments/Assignments'
-import Classroom from './classroom/Classroom'
 import User from './user/UserInfo'
 import './home.css'
 import Welcome from './Welcome'
@@ -76,10 +74,8 @@ class Home extends Component{
         return (
             <div>
             <Route path={`${parentPath}/welcome`} component={Welcome} />
-            <Route path="/home/educators" component={Educators} />
+            <Route path="/home/educators" render={(props) =><Educators {...props} educators={this.props.educators} />} />
             <Route path="/home/assignments" render={(props) =><Assignments {...props} assignments={this.props.assignments} />} />
-            <Route path="/home/classroom" component={Classroom} />
-            <Route path="/home/educators" component={Educators} />
             <Route path="/home/profile" component={User} />
             </div>
         )

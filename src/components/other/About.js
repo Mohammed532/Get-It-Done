@@ -1,11 +1,13 @@
 import React from 'react'
+import githubIcon from '../../res/github-icon.png'
 // imported other.css in index.js
 
 const About = () =>{
     return(
         <div className="about center white-text">
             <h2>About</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in euismod nisi. Maecenas laoreet ligula vestibulum, ultricies erat in, sodales elit. Morbi blandit a eros at suscipit. Fusce vitae nibh nunc. Sed porttitor ligula vel arcu ullamcorper, eget cursus odio blandit. Fusce eros nunc, rhoncus ut sollicitudin ac, luctus sed nisi. Nullam sagittis diam vel diam interdum, eget vehicula nulla tempor. Sed scelerisque lectus aliquet urna tempor imperdiet. In interdum dui urna, nec auctor nisi varius et. Etiam nec porttitor augue, at venenatis erat. Vivamus nibh urna, vulputate sit amet condimentum vitae, ullamcorper quis diam. Duis et nunc interdum, tempor dui vitae, sagittis leo. In hac habitasse platea dictumst. Proin consequat auctor tempor. Phasellus nec urna at nunc mattis sagittis.</p>
+            <p>While staying in quarantine, I realized that it was getting a bit tedious to keep track of all of my work and when they are due. My teachers had many different ways of getting assignments to me, meaning there was no central place to keep all of my assignments. I knew many other students were going through this same issue, so I decided that for this hackathon, I will help other students like me stay on top of their work and Get It Done!</p>
+            <a href="https://github.com/Mohammed532/Get-It-Done"><img src={githubIcon} width="100px" height="100px" alt="Github Repo" /><h5 className="github-link">Link to Github Repo</h5></a>
         </div>
     )
 }

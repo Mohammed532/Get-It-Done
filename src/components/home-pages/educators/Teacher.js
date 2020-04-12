@@ -1,22 +1,23 @@
 import React from 'react'
 import { Card } from 'react-materialize'
-import { Modal } from 'react-responsive-modal'
-import 'react-responsive-modal/styles.css';
+import 'react-responsive-modal/styles.css'
+// import { Modal } from 'react-responsive-modal'
 
-const Teacher = ({educators, contactModal, onOpenModal, onCloseModal}) =>{
+const Teacher = ({educators, deleteEducator, contactModal, onOpenModal, onCloseModal}) =>{
     let teacherList = educators.length ? (
         educators.map(teacher =>{
             return(
-                <div key={teacher.id}>
+                <div key={teacher.authId}>
                 <Card
                   actions={[
                     //   <h6 id={teacher.id} onClick={onOpenModal}>See contact info</h6>
                     <i className="contact">{teacher.email}</i>,
-                    <i className="contact">{teacher.phone}</i>
+                    <i className="contact">{teacher.phone}</i>,
+                    <span className="right delete white-text" onClick={()=>{deleteEducator(teacher.authId)}}>Delete</span>
                   ]}
                   className="grey darken-2"
                   textClassName="white-text grey darken-1"
-                  title={`${teacher.title} ${teacher.name}`}
+                  title={teacher.name}
                 >
                     <p>{`Class: ${teacher.class}`}</p>
                 </Card>

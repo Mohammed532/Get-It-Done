@@ -70,20 +70,11 @@ class AddAssignment extends Component{
                 url: ""
             })
 
-            // let info = this.removeElement(this.state, "modalOpen");
-            // info = this.removeElement(this.state, "titleIsEmpty");
-            // info = this.removeElement(this.state, "subjectIsEmpty");
-            // info = this.removeElement(this.state, "teacherIsEmpty");
+            let info = this.removeElement(this.state, "modalOpen");
+            info = this.removeElement(info, "titleIsEmpty");
+            info = this.removeElement(info, "subjectIsEmpty");
+            info = this.removeElement(info, "teacherIsEmpty");
 
-            const info ={
-                title: this.state.title,
-                subject: this.state.subject,
-                teacher: this.state.teacher,
-                description: this.state.description,
-                dueDate: this.state.dueDate,
-                file: this.state.file,
-                url: this.state.url  
-            }
             this.props.addAssignment(info)
 
             this.onCloseModal()
@@ -159,13 +150,14 @@ class AddAssignment extends Component{
                                 type="date"
                                 onChange={this.handleChange}
                             />
-                            <TextInput
+                            {/* Don't have file saving functionality yet */}
+                            {/* <TextInput
                                 name="file"
                                 placeholder="Link to file (saves file)"
                                 label="File"
                                 type="file"
                                 onChange={this.handleChange}
-                            />
+                            /> */}
                             <TextInput 
                                 name="url"
                                 label="Link to website document"

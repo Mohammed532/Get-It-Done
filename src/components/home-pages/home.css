@@ -63,6 +63,16 @@
     padding-right: 15px;
 }
 
+/* Work.js */
+.edit, .delete{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.delete{
+    color: red;
+}
+
 .title-drop-down{
     padding: 3px;
     border-radius: 4px;

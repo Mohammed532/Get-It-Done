@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { auth, db } from '../../config/fbConfig';
+import { auth } from '../../config/fbConfig';
 import { TextInput } from 'react-materialize'
 
 class SignUp extends Component{
@@ -13,8 +13,6 @@ class SignUp extends Component{
     }
 
     handleChange = e =>{
-        console.log(e.target.name, e.target.value);
-        
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -63,6 +61,7 @@ class SignUp extends Component{
                           className=""
                           onChange={this.handleChange}
                           name="firstName"
+                          id="firstName"
                           label="First Name"
                           m={12}
                           l={6}
@@ -71,6 +70,7 @@ class SignUp extends Component{
                           className=""
                           onChange={this.handleChange}
                           name="lastName"
+                          id="lastName"
                           label="Last Name"
                           m={12}
                           l={6}
@@ -81,6 +81,7 @@ class SignUp extends Component{
                           className=""
                           onChange={this.handleChange}
                           name="email"
+                          id="sign-up-email"
                           type="email"
                           label="Email"
                           placeholder="example@email.com"
@@ -93,6 +94,7 @@ class SignUp extends Component{
                           className={`${passwordMatch ? "" : "invalid"}`}
                           onChange={this.handleChange}
                           name="psswrd"
+                          id="sign-up-psswrd"
                           type="password"
                           label="Password"
                           s={12}
@@ -103,6 +105,7 @@ class SignUp extends Component{
                           className={`${passwordMatch ? "" : "invalid"}`}
                           onChange={this.handleChange}
                           name="psswrdConfirm"
+                          id="sign-up-psswrdConfirm"
                           type="password"
                           label="Confirm Password"
                           s={12}
