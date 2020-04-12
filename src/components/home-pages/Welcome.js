@@ -8,8 +8,8 @@ const Welcome = () =>{
     return(
         <div className="home">
             <div className="row content">
-                <div className="col m1 home-nav hide-on-small-only"><Navbar /></div>
-                <div className="col s12 m9">
+                <div className="col m2 l1 home-nav hide-on-small-only"><Navbar /></div>
+                <div className="col s12 m8 l9">
                     <div>
                         <h2 className="page-heading">Welcome {auth.currentUser ? auth.currentUser.displayName : ""}!</h2>
                         <h4>Lets get started!</h4>
@@ -55,7 +55,7 @@ const Welcome = () =>{
             <Button 
               floating 
               large 
-              className="home-btn"
+              className="home-btn red"
               onClick={()=>{auth.signOut()}}>
                 <Icon>exit_to_app</Icon>
             </Button>

@@ -60,8 +60,8 @@ class Assignments extends Component{
         return (
             <div className="assignment home">
                 <div className="row">
-                    <div className="col m1 home-nav hide-on-small-only"><Navbar /></div>
-                    <div className="col s12 m9">
+                    <div className="col m2 l1 home-nav hide-on-small-only"><Navbar /></div>
+                    <div className="col s12 m9 l9">
                     <div>
                         <h2 className="page-heading">Assignments </h2>
                             <AddAssignment addAssignment={this.addAssignment}/>
