@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Button, Icon } from 'react-materialize'
 import { auth, db } from '../../../config/fbConfig'
 import Navbar from '../Navbar'
 import Teacher from './Teacher'
@@ -69,8 +71,8 @@ class Educators extends Component{
         return (
             <div className="educators home">
                 <div className="row">
-                    <div className="col s1 home-nav"><Navbar /></div>
-                    <div className="col s9">
+                    <div className="col m1 home-nav hide-on-small-only"><Navbar /></div>
+                    <div className="col s12 m9">
                         <h2 className="page-heading">Educators</h2>
                         <AddEducator addEducator={this.addEducator}/>
                         <Teacher 
@@ -79,9 +81,11 @@ class Educators extends Component{
                           contactModal={this.state.contactModal}
                           onOpenModal={this.onOpenModal}
                           onCloseModal={this.onCloseModal} />
-                        {/* <div onClick={this.handleClick}>hello</div> */}
                     </div>
                 </div>
+                <Button floating large className="home-btn">
+                    <Link to="/home/welcome"><Icon>home</Icon></Link>
+                </Button>
             </div>
         )
     }

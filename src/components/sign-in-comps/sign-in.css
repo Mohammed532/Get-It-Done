@@ -1,6 +1,15 @@
 /* Style for components in /components/sign-in-comps */
 /* Exported to SignInComp.js */
 
+.login-input{
+    height: 30px !important; 
+    margin-bottom: 0 !important;
+}
+
+.login-btn{
+    display: block;
+}
+
 .login{
     padding: 5px;
     margin: 20px;
@@ -43,3 +52,8 @@
     width: 100%;
     height: 100%;
 }
+
+/* .sign-up-alert{
+    position: fixed;
+    transform: translateY(-500px);
+} */

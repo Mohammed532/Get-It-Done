@@ -16,6 +16,18 @@
     position: fixed;
 }
 
+.home-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+@media only screen and (min-width: 500px) {
+    .home-btn{
+        display: none;
+    }
+}
+
 .account{
     z-index: 1;
     display: block;
@@ -44,6 +56,10 @@
 .add-form-heading{
     padding-right: 10px;
 }
+
+/* .bottom-nav{
+    position: fixed;
+} */
 
 
 

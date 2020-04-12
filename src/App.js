@@ -10,6 +10,7 @@ class App extends Component{
     state = {
         assignments: [],
         educators: [],
+        ready: true,
 
         newUser: null,
         user: null,
@@ -19,7 +20,6 @@ class App extends Component{
     
     componentDidMount(){
         this.authListener()
-        
     }
 
     getDisplayName = (firstName, lastName) =>{
@@ -28,7 +28,10 @@ class App extends Component{
 
     authListener = () =>{
         auth.onAuthStateChanged((user) =>{
-            this.setState({needUpdate: true})
+            this.setState({
+                needUpdate: true,
+                ready: true
+            })
             if(user){
                 user.updateProfile({
                     displayName: displayName
@@ -42,8 +45,7 @@ class App extends Component{
                     user: null,
                 })
             }
-        }) 
-        
+        })
     }
 
     isNewUser = (login) =>{
@@ -61,7 +63,7 @@ class App extends Component{
                       assignments={this.state.assignments}
                       educators={this.state.educators} />}>
                 </Route>
-                <Redirect to={`${path}/welcome`} />
+                <Redirect to={`/home/welcome`} />
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Collection, CollectionItem, Button, Icon, Col, TextInput } from 'react-materialize'
 import { Modal } from 'react-responsive-modal'
 import firebase from 'firebase/app'
@@ -65,10 +66,10 @@ class UserInfo extends Component{
                 return (
                     <div key={emailKey}>
                     <CollectionItem className="valign-wrapper">
-                        <Col s={11} >
+                        <Col s={10} m={11}>
                         <p>{email}</p>
                         </Col>
-                        <Col s={1}>
+                        <Col s={2} m={1}>
                         <p className="delete" id={email} onClick={this.deleteEmail}>Delete</p>
                         </Col>
                     </CollectionItem>
@@ -151,10 +152,10 @@ class UserInfo extends Component{
                 return (
                     <div key={phoneKey}>
                     <CollectionItem className="valign-wrapper">
-                        <Col s={11} >
+                        <Col s={10} m={11}>
                         <p>{phone}</p>
                         </Col>
-                        <Col s={1}>
+                        <Col s={2} m={1}>
                         <p className="delete" id={phone} onClick={this.deletePhone}>Delete</p>
                         </Col>
                     </CollectionItem>
@@ -225,8 +226,8 @@ class UserInfo extends Component{
         return (
             <div className="profile home">
                 <div className="row">
-                    <div className="col s1 home-nav"><Navbar /></div>
-                    <div className="col s9">
+                    <div className="col m1 home-nav hide-on-small-only"><Navbar /></div>
+                    <div className="col s12 m9">
                         <div>
                             <h2 className="page-heading">{auth.currentUser ? (auth.currentUser.displayName):("")}</h2>
                             <div className={`materialert error ${showError ? "" : "hide"}`}>
@@ -261,6 +262,9 @@ class UserInfo extends Component{
                         </div>
                     </div>
                 </div>
+                <Button floating large className="home-btn">
+                    <Link to="/home/welcome"><Icon>home</Icon></Link>
+                </Button>
             </div>
         )
     }

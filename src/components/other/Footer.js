@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () =>{
     return(
-        <footer className="page-footer">
+        <footer className="page-footer grey darken-3">
 
         </footer>
     )

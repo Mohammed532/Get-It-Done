@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
+import { Button, Icon } from 'react-materialize'
 import { auth, db } from '../../../config/fbConfig'
 import Navbar from '../Navbar'
 import AddAssignment from './AddAssignment'
 import Work from './Work'
+import homeIcon from '../../../res/chimney-home-icon-transparent-1.png'
+import { Link } from 'react-router-dom'
+
 
 class Assignments extends Component{
     constructor(props) {
@@ -56,15 +60,16 @@ class Assignments extends Component{
         return (
             <div className="assignment home">
                 <div className="row">
-                    <div className="col s1 home-nav"><Navbar /></div>
-                    <div className="col s9">
+                    <div className="col m1 home-nav hide-on-small-only"><Navbar /></div>
+                    <div className="col s12 m9">
                     <div>
-                        <h2 className="page-heading">Assignments</h2>
+                        <h2 className="page-heading">Assignments </h2>
                             <AddAssignment addAssignment={this.addAssignment}/>
                             <Work assignments={this.state.assignments} deleteAssignment={this.deleteAssignment}/>
                         </div>
                     </div>
                 </div>
+                <Button floating large className="home-btn"><Link to="/home/welcome"><Icon>home</Icon></Link></Button>
             </div>
         )
     }

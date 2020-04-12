@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { TextInput, Icon } from 'react-materialize'
 import { auth } from '../../config/fbConfig';
-import { TextInput } from 'react-materialize'
+
 
 class SignUp extends Component{
     state = {
         passwordMatch: true,
+        firstNameEmpty: false,
+        lastNameEmpty: false,
+
         firstName: "",
         lastName: "",
         email: "",
@@ -25,8 +29,20 @@ class SignUp extends Component{
         if(psswrd !== psswrdConfirm){
             this.setState({passwordMatch: false})
             
+        }else if(firstName === "" || lastName === ""){
+            if(firstName === ""){
+                this.setState({firstNameEmpty: true})
+            }
+
+            if(lastName === ""){
+                this.setState({lastNameEmpty: true})
+            }
         }else{
-            this.setState({passwordMatch: true})
+            this.setState({
+                passwordMatch: true,
+                firstNameEmpty: false,
+                lastNameEmpty: false
+            })
 
             auth.createUserWithEmailAndPassword(email, psswrd)
               .then((user) =>{
@@ -37,18 +53,20 @@ class SignUp extends Component{
                 
               })
               .catch((err) =>{
-                console.error("There was a problem........", err);
-              })
-            
-        }
-
-
-        
+                if(err.code === 'auth/email-already-in-use'){
+                    alert("You already have an account. Please login")
+                    
+                }else{
+                    console.log(err.code);
+                }
+              })   
+        }   
     }
 
     render() {
-        const {passwordMatch} = this.state;
+        const {passwordMatch, firstNameEmpty, lastNameEmpty} = this.state;
         return (
+            <div className="sign-up">
             <div className="sign-up container grey lighten-2 z-depth-1">
                 <div className="sign-up-heading center">
                     <h3>Sign Up</h3>
@@ -58,20 +76,22 @@ class SignUp extends Component{
                 <form className="sign-up-form" onSubmit={this.handleSubmit}>
                     <div className="row">
                         <TextInput
-                          className=""
+                          className={`${firstNameEmpty ? "invalid" : ""}`}
                           onChange={this.handleChange}
                           name="firstName"
                           id="firstName"
                           label="First Name"
+                          s={12}
                           m={12}
                           l={6}
                         />
                         <TextInput
-                          className=""
+                          className={`${lastNameEmpty ? "invalid" : ""}`}
                           onChange={this.handleChange}
                           name="lastName"
                           id="lastName"
                           label="Last Name"
+                          s={12}
                           m={12}
                           l={6}
                         />
@@ -116,6 +136,7 @@ class SignUp extends Component{
                     </div>
                     
                 </form>
+            </div>
             </div>
         )
     }
