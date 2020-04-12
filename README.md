@@ -9,6 +9,10 @@ While staying in quarantine, I realized that it was getting a bit tedious to kee
 ## About this project
 For this project, I used React for the frontend of the website, and Firebase to handle the backend (specifically Firebase Auth, Firestore, and Firebase hosting)
 
+Fun fact, I built this in a week :D Whether or not that this is obvious is up to interpretation
+
+I learned a lot about web development during this, and I'm grateful to have taken apart of something that has helped me learn so much.
+
 ## Who is this for?
 Students who need to keep track of all of their assignments and send them to their teachers when ready
 
