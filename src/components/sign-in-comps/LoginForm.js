@@ -30,7 +30,8 @@ class Login extends Component{
 
     render() {
         return (
-            <div className="login z-depth-2 grey darken-3">
+            <div className="login">
+            <div className="z-depth-2 grey darken-3">
                 <div className="row valign-wrapper">
                     <div className="col m5 hide-on-small-only"><h4 className="inline white-text">Login</h4></div>
                     
@@ -63,6 +64,7 @@ class Login extends Component{
                     <button className="btn-small grey lighten-2 black-text" onClick={this.handleSubmit}>Login</button>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }
