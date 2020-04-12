@@ -17,24 +17,3 @@ Students who need to keep track of all of their assignments and send them to the
 
 ## Author
 [Mohammed Akinbayo](https://github.com/Mohammed532)
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-
-#### More will be added when project is done 
