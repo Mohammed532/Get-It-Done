@@ -72,7 +72,7 @@ class Educators extends Component{
             <div className="educators home">
                 <div className="row">
                     <div className="col m2 l1 home-nav hide-on-small-only"><Navbar /></div>
-                    <div className="col s12 m8 l9">
+                    <div className="col s12 m8 l10">
                         <h2 className="page-heading">Educators</h2>
                         <AddEducator addEducator={this.addEducator}/>
                         <Teacher 

@@ -18,7 +18,7 @@ const Work = ({assignments, deleteAssignment}) =>{
                         <h6>Subject: {assnmnt.subject}</h6>
                         <h6>Teacher: {assnmnt.teacher}</h6>
                         <p>{assnmnt.description}</p>
-                        <p><a href={assnmnt.url} target="_blank">{assnmnt.url}</a></p>
+                        <p className="link"><a href={assnmnt.url} target="_blank">{assnmnt.url}</a></p>
                         <Divider />
                         {/* <span className="edit">Edit</span> */} <span className="delete" onClick={()=>{deleteAssignment(assnmnt.authId)}}>Delete</span>
                     </div>

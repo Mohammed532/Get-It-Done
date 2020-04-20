@@ -1,3 +1,5 @@
+// NEVER USED. WILL UPDATE FOR FUTURE USE
+
 import React, { Component } from 'react'
 import Navbar from '../Navbar'
 

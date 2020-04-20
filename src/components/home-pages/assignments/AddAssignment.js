@@ -28,16 +28,26 @@ class AddAssignment extends Component{
         this.setState({ modalOpen: false });
     };
 
+    formatDate(date) {
+        //Used to fix weird 'one day behind input' bug
+        let dateParts = date.match(/(\d+)/g);
+        let d = new Date(dateParts[0], dateParts[1]-1, dateParts[2]);
+        
+        //Gets month, day, and year from date input
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
+        let year = d.getFullYear();
+
+        //returns formatted string
+        return `${month}/${day}/${year}`
+    }
+
     handleChange = e =>{
         if(e.target.name === "dueDate"){
-            const d = new Date(e.target.value);
-            
-            let month = d.getMonth() + 1;
-            let day = d.getDate();
-            let year = d.getFullYear();
-
+            //need to format string to be better readable first
+            let newDate = this.formatDate(e.target.value)
             this.setState({
-                dueDate: `${month}/${day}/${year}`
+                dueDate: newDate
             })
         }else{
             this.setState({
@@ -70,6 +80,7 @@ class AddAssignment extends Component{
                 url: ""
             })
 
+            //removes all unneed elements in state for less clutter in the database
             let info = this.removeElement(this.state, "modalOpen");
             info = this.removeElement(info, "titleIsEmpty");
             info = this.removeElement(info, "subjectIsEmpty");

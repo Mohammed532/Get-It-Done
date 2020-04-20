@@ -9,7 +9,7 @@ const Welcome = () =>{
         <div className="home">
             <div className="row content">
                 <div className="col m2 l1 home-nav hide-on-small-only"><Navbar /></div>
-                <div className="col s12 m8 l9">
+                <div className="col s12 m8 l10">
                     <div>
                         <h2 className="page-heading">Welcome {auth.currentUser ? auth.currentUser.displayName : ""}!</h2>
                         <h4>Lets get started!</h4>
