@@ -1,7 +1,7 @@
 import React from 'react'
 import { Collapsible, Divider } from 'react-materialize'
 
-const Work = ({assignments, deleteAssignment}) =>{
+const Work = ({assignments, deleteAssignment, editAssignment}) =>{
     let assignmentList = assignments.length ? (
         assignments.map(assnmnt =>{
             return(
@@ -20,7 +20,10 @@ const Work = ({assignments, deleteAssignment}) =>{
                         <p>{assnmnt.description}</p>
                         <p className="link"><a href={assnmnt.url} target="_blank">{assnmnt.url}</a></p>
                         <Divider />
-                        {/* <span className="edit">Edit</span> */} <span className="delete" onClick={()=>{deleteAssignment(assnmnt.authId)}}>Delete</span>
+                        <div className="el-actions">
+                        <span className="edit" onClick={()=>{editAssignment(assnmnt.authId)}}>Edit</span> 
+                        <span className="delete" onClick={()=>{deleteAssignment(assnmnt.authId)}}>Delete</span>
+                        </div>
                     </div>
                 </li>
             )

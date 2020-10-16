@@ -86,7 +86,7 @@
   word-wrap: break-word;
 
   -ms-word-break: break-all;
-  
+
   /* Instead use this non-standard one: */
   word-break: break-word;
 
@@ -98,13 +98,24 @@
 
 }
 
+.el-actions{
+    padding-top: 10px;
+}
+
 .edit, .delete{
     text-decoration: underline;
     cursor: pointer;
 }
 
+.edit{
+    padding-right: 13px;
+    border-right: 1px solid black;
+}
+
 .delete{
     color: red;
+    padding-left: 10px;
+
 }
 
 .title-drop-down{
